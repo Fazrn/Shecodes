@@ -60,3 +60,12 @@ span a {
 .weatherData {
   margin-top: 0;
 }
+p {
+  text-align: center;
+  margin-top: -5em;
+  margin-left: -26em;
+  font-family: arial, sans-serif;
+}
+p a {
+  text-decoration: none;
+}
