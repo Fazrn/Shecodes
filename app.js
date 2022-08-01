@@ -57,6 +57,8 @@ function showDataResult(response) {
   let cityNameElement = document.querySelector(".cityName");
   let descriptionElement = document.querySelector("#description");
   let currentDateElement = document.querySelector(".currentDate");
+  let iconElement = document.querySelector("#icon");
+
   cityNameElement.innerHTML = updatedCityName;
   tempElement.innerHTML = temperature;
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
@@ -66,6 +68,11 @@ function showDataResult(response) {
   descriptionElement.innerHTML = response.data.weather[0].description;
   let timeStamp = response.data.dt;
   currentDateElement.innerHTML = showDate(timeStamp);
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 function searchCity(city) {
