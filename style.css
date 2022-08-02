@@ -73,3 +73,8 @@ p {
 p a {
   text-decoration: none;
 }
+
+.temperaturewrapper .active {
+  color: black;
+  cursor: default;
+}

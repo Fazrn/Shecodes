@@ -51,13 +51,14 @@ function showDate(timeStamp) {
 }
 
 function showDataResult(response) {
-  let temperature = Math.round(response.data.main.temp);
   let updatedCityName = response.data.name;
   let tempElement = document.querySelector("#temperature");
   let cityNameElement = document.querySelector(".cityName");
   let descriptionElement = document.querySelector("#description");
   let currentDateElement = document.querySelector(".currentDate");
   let iconElement = document.querySelector("#icon");
+  celsius = response.data.main.temp;
+  let temperature = Math.round(celsius);
 
   cityNameElement.innerHTML = updatedCityName;
   tempElement.innerHTML = temperature;
@@ -88,29 +89,29 @@ function changeCityName(event) {
   searchInput.value = "";
   searchCity(city);
 }
-
+let temperature = document.querySelector("#temperature");
 let searchForm = document.querySelector(".searchForm");
 
 searchForm.addEventListener("submit", changeCityName);
-
-function convertToCelsius() {
-  let temperature = document.querySelector("#temperature");
-  let tempValue = temperature.innerText;
-  celsiusConvertedTemp = ((tempValue - 32) * 5) / 9;
-  temperature.innerHTML = Math.round(celsiusConvertedTemp);
+function showCelsiusTemperature(event) {
+  event.preventDefault();
+  fahrenheitElement.classList.remove("active");
+  celsiusElement.classList.add("active");
+  temperature.innerHTML = Math.round(celsius);
 }
-let celsius = document.querySelector("#celsius");
-celsius.addEventListener("click", convertToCelsius);
 
-function convertToFahrenheit() {
-  let temperature = document.querySelector("#temperature");
-  let tempValue = temperature.innerText;
-  fahrenheitConvertedTemp = (tempValue * 9) / 5 + 32;
+function showFahrenheitTemperature(event) {
+  event.preventDefault();
+  fahrenheitElement.classList.add("active");
+  celsiusElement.classList.remove("active");
+  fahrenheitConvertedTemp = (celsius * 9) / 5 + 32;
   temperature.innerHTML = Math.round(fahrenheitConvertedTemp);
 }
-
-let fahrenheit = document.querySelector("#fahrenheit");
-fahrenheit.addEventListener("click", convertToFahrenheit);
+let celsius = null;
+let celsiusElement = document.querySelector("#celsius");
+celsiusElement.addEventListener("click", showCelsiusTemperature);
+let fahrenheitElement = document.querySelector("#fahrenheit");
+fahrenheitElement.addEventListener("click", showFahrenheitTemperature);
 
 function showCurrentPosition(position) {
   let latitude = position.coords.latitude;
