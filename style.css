@@ -1,5 +1,5 @@
 .wrapper {
-  height: 450px;
+  height: 500px;
   width: 700px;
   border: 2px solid #eceef0;
   border-radius: 5px;
@@ -19,6 +19,9 @@
 
 #icon {
   float: left;
+}
+.cityName {
+  font-size: 30px;
 }
 ul {
   margin-top: 1.7em;
@@ -64,17 +67,38 @@ span a {
 .weatherData {
   margin-top: 1.5em;
 }
-p {
+.srcCodeAddress {
   text-align: center;
   margin-top: -5em;
   margin-left: -26em;
   font-family: arial, sans-serif;
 }
-p a {
+.srcCodeAddress a {
   text-decoration: none;
 }
 
 .temperaturewrapper .active {
   color: black;
   cursor: default;
+}
+
+.firstPredictedDay {
+  line-height: 0.5;
+  text-align: center;
+  margin-bottom: 0;
+  margin-top: 3.5em;
+  opacity: 0.6;
+}
+
+.predictedTemps {
+  text-align: center;
+  line-height: 0.5;
+}
+
+.predictedIcon {
+  width: 6em;
+}
+.highestTemp {
+  padding-left: 10px;
+  opacity: 0.9;
 }

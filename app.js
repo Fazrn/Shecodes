@@ -116,6 +116,32 @@ function showCurrentPosition(position) {
 function showCurrentLocationData(event) {
   navigator.geolocation.getCurrentPosition(showCurrentPosition);
 }
+function showFutureDaysTemps() {
+  let days = ["Fri", "Sat", "Sun", "Mon", "Tue", "Wed"];
+  let futureDaysElement = document.querySelector("#future-days");
+  let forecast = `<div class="row">`;
+  days.forEach(function (day) {
+    forecast =
+      forecast +
+      `
+            <div class="col-2">
+              <h5 class="firstPredictedDay">${day}</h5>
+              <img
+                class="predictedIcon"
+                src="http://openweathermap.org/img/wn/02n@2x.png"
+                alt="Weather-icon"
+              />
+              <p class="predictedTemps">
+                <span class="lowestTemp">11</span>
+                <span class="highestTemp">20</span>
+              </p>
+            </div>
+          `;
+  });
+
+  forecast = forecast + `</div>`;
+  futureDaysElement.innerHTML = forecast;
+}
 
 let temperature = document.querySelector("#temperature");
 let searchForm = document.querySelector(".searchForm");
@@ -131,3 +157,4 @@ let currentButton = document.querySelector("#currentButton");
 currentButton.addEventListener("click", showCurrentLocationData);
 
 searchCity("Tehran");
+showFutureDaysTemps();
