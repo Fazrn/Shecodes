@@ -1,8 +1,10 @@
-.wrapper {
+.weatherAppWrapper {
   height: 500px;
-  width: 700px;
   border: 2px solid #eceef0;
   border-radius: 5px;
+}
+.wrapper {
+  width: 700px;
   display: block;
   margin: 5em auto;
 }
@@ -56,9 +58,7 @@ ul li h1 {
   font-size: 50px;
   line-height: 1.8;
 }
-span a {
-  text-decoration: none;
-}
+
 .temperatureScales {
   position: relative;
   top: -25px;
@@ -67,19 +67,9 @@ span a {
 .weatherData {
   margin-top: 1.5em;
 }
-.srcCodeAddress {
-  text-align: center;
-  margin-top: -5em;
-  margin-left: -26em;
-  font-family: arial, sans-serif;
-}
+
 .srcCodeAddress a {
   text-decoration: none;
-}
-
-.temperaturewrapper .active {
-  color: black;
-  cursor: default;
 }
 
 .firstPredictedDay {
@@ -98,7 +88,7 @@ span a {
 .predictedIcon {
   width: 6em;
 }
-.highestTemp {
+.lowestTemp {
   padding-left: 10px;
-  opacity: 0.9;
+  opacity: 0.7;
 }

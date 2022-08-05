@@ -21,65 +21,63 @@
   <body>
     <div class="container">
       <div class="wrapper">
-        <form class="row mt-4 searchForm">
-          <div class="col-6">
-            <input
-              id="searchInput"
-              class="form-control shadow-sm"
-              type="text"
-              placeholder="Search for a city"
-              autocomplete="off"
-            />
-          </div>
-          <div class="col-3">
-            <input
-              type="submit"
-              class="form-control btn btn-primary shadow-sm"
-              value="Search"
-            />
-          </div>
-          <div class="col-3">
-            <button
-              class="form-control btn btn-primary shadow-sm"
-              id="currentButton"
-            >
-              Current
-            </button>
-          </div>
-        </form>
-        <ul>
-          <li><h1 class="cityName"></h1></li>
-          <li class="currentDate"></li>
-          <li id="description"></li>
-        </ul>
+        <div class="weatherAppWrapper">
+          <form class="row mt-4 searchForm">
+            <div class="col-6">
+              <input
+                id="searchInput"
+                class="form-control shadow-sm"
+                type="text"
+                placeholder="Search for a city"
+                autocomplete="off"
+              />
+            </div>
+            <div class="col-3">
+              <input
+                type="submit"
+                class="form-control btn btn-primary shadow-sm"
+                value="Search"
+              />
+            </div>
+            <div class="col-3">
+              <button
+                class="form-control btn btn-primary shadow-sm"
+                id="currentButton"
+              >
+                Current
+              </button>
+            </div>
+          </form>
+          <ul>
+            <li><h1 class="cityName"></h1></li>
+            <li class="currentDate"></li>
+            <li id="description"></li>
+          </ul>
 
-        <div class="row">
-          <div class="col">
-            <img src="" alt="" id="icon" />
-            <div class="float-left temperaturewrapper">
-              <span id="temperature"></span>
+          <div class="row">
+            <div class="col">
+              <img src="" alt="" id="icon" />
+              <div class="float-left temperaturewrapper">
+                <span id="temperature"></span>
 
-              <span class="temperatureScales">
-                <a href="#" id="celsius" class="active">°C</a>
-                |
-                <a href="#" id="fahrenheit">°F</a>
-              </span>
+                <span class="temperatureScales">°C</span>
+              </div>
+            </div>
+            <div class="col">
+              <ul class="weatherData">
+                <li>Humidity: <span id="humidity"></span>%</li>
+                <li>Wind: <span id="wind"></span> km/h</li>
+              </ul>
             </div>
           </div>
-          <div class="col">
-            <ul class="weatherData">
-              <li>Humidity: <span id="humidity"></span>%</li>
-              <li>Wind: <span id="wind"></span> km/h</li>
-            </ul>
-          </div>
+          <div id="future-days"></div>
         </div>
-        <div id="future-days"></div>
-      </div>
 
-      <p class="srcCodeAddress">
-        <a href="https://github.com/Fazrn/Shecodes">Open-source code</a> by
-        Fazilat Ranjbaran
-      </p>
+        <p class="srcCodeAddress">
+          <a href="https://github.com/Fazrn/Shecodes">Open-source code</a> by
+          Fazilat Ranjbaran
+        </p>
+      </div>
     </div>
 
     <script src="app.js"></script>

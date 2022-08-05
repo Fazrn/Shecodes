@@ -28,7 +28,6 @@ let currentDate = document.querySelector(".currentDate");
 currentDate.innerHTML = date; */
 function showDate(timeStamp) {
   let now = new Date(timeStamp * 1000);
-  console.log(now);
   let days = [
     "Sunday",
     "Monday",
@@ -48,6 +47,53 @@ function showDate(timeStamp) {
     minute = `0${minute};`;
   }
   return `${day} ${hour}:${minute}`;
+}
+
+function showPredictedDay(timeStamp) {
+  let now = new Date(timeStamp * 1000);
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  let day = days[now.getDay()];
+  return day;
+}
+
+function showPredictedData(response) {
+  console.log(response.data.daily);
+  let predictdDays = response.data.daily;
+  let futureDaysElement = document.querySelector("#future-days");
+  let forecast = `<div class="row">`;
+  predictdDays.forEach(function (predictedDay, index) {
+    if (index < 6) {
+      forecast =
+        forecast +
+        `
+            <div class="col-2">
+              <h5 class="firstPredictedDay">${showPredictedDay(
+                predictedDay.dt
+              )}</h5>
+              <img
+                class="predictedIcon"
+                src="http://openweathermap.org/img/wn/02n@2x.png"
+                alt="Weather-icon"
+              />
+              <p class="predictedTemps">
+                <span>${Math.round(predictedDay.temp.max)}</span>
+                <span class="lowestTemp">${Math.round(
+                  predictedDay.temp.min
+                )}</span>
+              </p>
+            </div>
+          `;
+    }
+  });
+
+  forecast = forecast + `</div>`;
+  futureDaysElement.innerHTML = forecast;
+}
+
+function getPredictedData(coordinates) {
+  let apiKey = "9feaf93d48daeaeeb2d9ea551226a8c4";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showPredictedData);
 }
 
 function showDataResult(response) {
@@ -74,6 +120,8 @@ function showDataResult(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  getPredictedData(response.data.coord);
 }
 
 function searchCity(city) {
@@ -90,21 +138,6 @@ function changeCityName(event) {
   searchCity(city);
 }
 
-function showCelsiusTemperature(event) {
-  event.preventDefault();
-  fahrenheitElement.classList.remove("active");
-  celsiusElement.classList.add("active");
-  temperature.innerHTML = Math.round(celsius);
-}
-
-function showFahrenheitTemperature(event) {
-  event.preventDefault();
-  fahrenheitElement.classList.add("active");
-  celsiusElement.classList.remove("active");
-  fahrenheitConvertedTemp = (celsius * 9) / 5 + 32;
-  temperature.innerHTML = Math.round(fahrenheitConvertedTemp);
-}
-
 function showCurrentPosition(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
@@ -116,45 +149,12 @@ function showCurrentPosition(position) {
 function showCurrentLocationData(event) {
   navigator.geolocation.getCurrentPosition(showCurrentPosition);
 }
-function showFutureDaysTemps() {
-  let days = ["Fri", "Sat", "Sun", "Mon", "Tue", "Wed"];
-  let futureDaysElement = document.querySelector("#future-days");
-  let forecast = `<div class="row">`;
-  days.forEach(function (day) {
-    forecast =
-      forecast +
-      `
-            <div class="col-2">
-              <h5 class="firstPredictedDay">${day}</h5>
-              <img
-                class="predictedIcon"
-                src="http://openweathermap.org/img/wn/02n@2x.png"
-                alt="Weather-icon"
-              />
-              <p class="predictedTemps">
-                <span class="lowestTemp">11</span>
-                <span class="highestTemp">20</span>
-              </p>
-            </div>
-          `;
-  });
-
-  forecast = forecast + `</div>`;
-  futureDaysElement.innerHTML = forecast;
-}
 
 let temperature = document.querySelector("#temperature");
 let searchForm = document.querySelector(".searchForm");
 searchForm.addEventListener("submit", changeCityName);
 
-let celsius = null;
-let celsiusElement = document.querySelector("#celsius");
-celsiusElement.addEventListener("click", showCelsiusTemperature);
-let fahrenheitElement = document.querySelector("#fahrenheit");
-fahrenheitElement.addEventListener("click", showFahrenheitTemperature);
-
 let currentButton = document.querySelector("#currentButton");
 currentButton.addEventListener("click", showCurrentLocationData);
 
 searchCity("Tehran");
-showFutureDaysTemps();
