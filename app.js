@@ -72,7 +72,9 @@ function showPredictedData(response) {
               )}</h5>
               <img
                 class="predictedIcon"
-                src="http://openweathermap.org/img/wn/02n@2x.png"
+                src="http://openweathermap.org/img/wn/${
+                  predictedDay.weather[0].icon
+                }@2x.png"
                 alt="Weather-icon"
               />
               <p class="predictedTemps">
