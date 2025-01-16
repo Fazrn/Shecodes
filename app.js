@@ -57,44 +57,66 @@ function showPredictedDay(timeStamp) {
 }
 
 function showPredictedData(response) {
-  console.log(response.data.daily);
-  let predictdDays = response.data.daily;
+  console.log(response.data.list); // Log the response to inspect the data structure
+
+  let forecastData = response.data.list;
   let futureDaysElement = document.querySelector("#future-days");
   let forecast = `<div class="row">`;
-  predictdDays.forEach(function (predictedDay, index) {
-    if (index < 6) {
-      forecast =
-        forecast +
-        `
-            <div class="col-2">
-              <h5 class="firstPredictedDay">${showPredictedDay(
-                predictedDay.dt
-              )}</h5>
-              <img
-                class="predictedIcon"
-                src="http://openweathermap.org/img/wn/${
-                  predictedDay.weather[0].icon
-                }@2x.png"
-                alt="Weather-icon"
-              />
-              <p class="predictedTemps">
-                <span>${Math.round(predictedDay.temp.max)}</span>
-                <span class="lowestTemp">${Math.round(
-                  predictedDay.temp.min
-                )}</span>
-              </p>
-            </div>
-          `;
+
+  // Group forecast data by day
+  let dailyForecast = {};
+  forecastData.forEach((item) => {
+    let date = new Date(item.dt * 1000).toLocaleDateString();
+    if (!dailyForecast[date]) {
+      dailyForecast[date] = {
+        temps: [],
+        icons: [],
+        descriptions: [],
+      };
     }
+    dailyForecast[date].temps.push(item.main.temp);
+    dailyForecast[date].icons.push(item.weather[0].icon);
+    dailyForecast[date].descriptions.push(item.weather[0].description);
   });
 
-  forecast = forecast + `</div>`;
+  // Generate HTML for the next 5 days
+  let dayCount = 0;
+  for (let date in dailyForecast) {
+    if (dayCount >= 5) break; // Limit to 5 days
+
+    let dayData = dailyForecast[date];
+    let maxTemp = Math.round(Math.max(...dayData.temps));
+    let minTemp = Math.round(Math.min(...dayData.temps));
+    let icon = dayData.icons[0]; // Use the first icon of the day
+    let description = dayData.descriptions[0]; // Use the first description of the day
+
+    forecast += `
+      <div class="col">
+        <h5 class="firstPredictedDay">${showPredictedDay(
+          new Date(date).getTime() / 1000
+        )}</h5>
+        <img
+          class="predictedIcon"
+          src="http://openweathermap.org/img/wn/${icon}@2x.png"
+          alt="${description}"
+        />
+        <p class="predictedTemps">
+          <span>${maxTemp}</span>
+          <span class="lowestTemp">${minTemp}</span>
+        </p>
+      </div>
+    `;
+
+    dayCount++;
+  }
+
+  forecast += `</div>`;
   futureDaysElement.innerHTML = forecast;
 }
 
 function getPredictedData(coordinates) {
   let apiKey = "9feaf93d48daeaeeb2d9ea551226a8c4";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showPredictedData);
 }
 
