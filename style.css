@@ -3,57 +3,68 @@
   border: 2px solid #eceef0;
   border-radius: 5px;
 }
+
 .wrapper {
   width: 700px;
   display: block;
   margin: 5em auto;
 }
+
 .searchForm {
   margin-left: 0.5em;
   margin-right: 0.5em;
-}
-.searchForm input {
-  padding: 0.7rem;
-}
-.searchForm button {
-  padding: 0.7rem;
+
+  input {
+    padding: 0.7rem;
+  }
+
+  button {
+    padding: 0.7rem;
+  }
 }
 
 #icon {
   float: left;
 }
+
 .cityName {
   font-size: 30px;
 }
+
 ul {
   margin-top: 1.7em;
   line-height: 1.2em;
   padding-left: 1.2em;
-}
-ul li {
-  color: #7c7c7c;
-  list-style-type: none;
-  font-family: arial, sans-serif;
-  font-size: 16px;
-  font-weight: 100;
-}
-li::first-letter {
-  text-transform: capitalize;
-}
-ul li h1 {
-  font-size: 24px;
-  line-height: 20px;
-  font-weight: 500;
-}
-.cloudySunnyIcon {
-  font-size: 50px;
-  margin-left: 0.4em;
-  margin-top: 0.1em;
+
+  li {
+    color: #7c7c7c;
+    list-style-type: none;
+    font-family: arial, sans-serif;
+    font-size: 16px;
+    font-weight: 100;
+
+    h1 {
+      font-size: 24px;
+      line-height: 20px;
+      font-weight: 500;
+    }
+
+    .cloudySunnyIcon {
+      font-size: 50px;
+      margin-left: 0.4em;
+      margin-top: 0.1em;
+    }
+  }
+
+  li::first-letter {
+    text-transform: capitalize;
+  }
 }
 
 .temperaturewrapper {
   margin-left: 1em;
 }
+
 #temperature {
   font-size: 50px;
   line-height: 1.8;
@@ -66,6 +77,11 @@ ul li h1 {
 
 .weatherData {
   margin-top: 1.5em;
+
+  li {
+    font-size: 20px;
+    margin-bottom: 1rem;
+  }
 }
 
 .srcCodeAddress a {
@@ -87,7 +103,9 @@ ul li h1 {
 
 .predictedIcon {
   width: 6em;
+  margin-left: 0.7rem;
 }
+
 .lowestTemp {
   padding-left: 10px;
   opacity: 0.7;
